@@ -2,6 +2,7 @@ package com.jspdbdemo.web.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -187,5 +188,33 @@ public class StudentDbUtil {
 			// clean up the JDBC objects
 			close(myConn, myStmt, null);
 		}
+	}
+
+	public void deleteStudent(String studentId) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		int id = Integer.parseInt(studentId);	
+		try {
+			// get the connection
+			myConn = dataSource.getConnection();			
+
+			// create the SQL
+			String sql = "delete from student "
+					+ "where id=?";
+
+			// create prepared statement
+			myStmt = myConn.prepareStatement(sql);
+			
+			// set the parameter values for the student
+			myStmt.setInt(1, id);
+
+			// execute the SQL update
+			myStmt.execute();
+		}
+		finally {
+			// clean up the JDBC objects
+			close(myConn, myStmt, null);
+		}
+		
 	}
 }

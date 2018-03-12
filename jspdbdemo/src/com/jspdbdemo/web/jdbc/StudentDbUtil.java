@@ -160,8 +160,32 @@ public class StudentDbUtil {
 	}
 
 	public void updateStudent(Student theStudent) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		try {
+			// get the connection
+			myConn = dataSource.getConnection();			
 
-		// TODO Auto-generated method stub
-		
+			// create the SQL
+			String sql = "update student "
+					+ "set first_name=?, last_name=?, email=? "
+					+ "where id=?";
+
+			// create prepared statement
+			myStmt = myConn.prepareStatement(sql);
+			
+			// set the parameter values for the student
+			myStmt.setString(1, theStudent.getFirstName());
+			myStmt.setString(2, theStudent.getLastName());
+			myStmt.setString(3, theStudent.getEmail());
+			myStmt.setInt(4, theStudent.getId());
+
+			// execute the SQL update
+			myStmt.execute();
+		}
+		finally {
+			// clean up the JDBC objects
+			close(myConn, myStmt, null);
+		}
 	}
 }

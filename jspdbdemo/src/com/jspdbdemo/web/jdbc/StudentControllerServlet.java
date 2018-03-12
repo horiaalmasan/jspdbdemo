@@ -58,12 +58,20 @@ public class StudentControllerServlet extends HttpServlet {
 			// route it to the appropriate method
 			switch (theCommand) {
 				case "LIST" : 
-					listStudents(request, response); 	// list the students in MVC fashion
+					listStudents(request, response); 		// list the students in MVC fashion
 					break;
 					
 				case "ADD" : 
-					addStudent(request, response);		// add student 
+					addStudent(request, response);			// add student 
 					break;
+					
+				case "LOAD" : 
+					loadStudent(request, response);		// load student 
+					break;				
+					
+				case "UPDATE" : 
+					updateStudent(request, response);	// update student 
+					break;		
 					
 				default:
 					listStudents(request, response);
@@ -73,6 +81,45 @@ public class StudentControllerServlet extends HttpServlet {
 			throw new ServletException();
 		}
 	}
+
+
+	private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		// read student info from the form data
+		int id = Integer.parseInt(request.getParameter("studentId"));
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		
+		// create a new student object
+		Student theStudent = new Student(id, firstName, lastName, email);
+		
+		// perform update on the database
+		studentDbUtil.updateStudent(theStudent);
+		
+		// send back to the main page (the student list)
+		listStudents(request, response);
+	}
+
+
+
+	private void loadStudent(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception{
+		
+		// read student id from the form data 
+		String theStudentId = request.getParameter("studentId");
+		
+		// get student from the database (db util)
+		Student theStudent = studentDbUtil.getStudent(theStudentId);
+		
+		// place student in the request attribute
+		request.setAttribute("THE_STUDENT", theStudent);
+		
+		// send to the jsp page: update-student-form.jsp
+		RequestDispatcher dispatcher =
+				request.getRequestDispatcher("/update-student-form.jsp");
+		dispatcher.forward(request, response);
+	}
+
 
 
 	private void listStudents(HttpServletRequest request, HttpServletResponse response) 

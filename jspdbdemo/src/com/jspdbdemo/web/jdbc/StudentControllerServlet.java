@@ -40,6 +40,30 @@ public class StudentControllerServlet extends HttpServlet {
 	}
 
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            // read the "command" parameter
+            String theCommand = request.getParameter("command");
+                    
+            // route to the appropriate method
+            switch (theCommand) {
+                            
+            case "ADD":
+                addStudent(request, response);
+                break;
+                                
+            default:
+                listStudents(request, response);
+            }
+                
+        }
+        catch (Exception exc) {
+            throw new ServletException(exc);
+        }
+        
+    }
+	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,10 +85,6 @@ public class StudentControllerServlet extends HttpServlet {
 					listStudents(request, response); 		// list the students in MVC fashion
 					break;
 					
-				case "ADD" : 
-					addStudent(request, response);			// add student 
-					break;
-					
 				case "LOAD" : 
 					loadStudent(request, response);		// load student 
 					break;				
@@ -77,6 +97,10 @@ public class StudentControllerServlet extends HttpServlet {
 					deleteStudent(request, response);	// update student 
 					break;		
 					
+				case "SEARCH" : 
+					searchStudent(request, response);	// update student 
+					break;		
+					
 				default:
 					listStudents(request, response);
 			}
@@ -84,6 +108,26 @@ public class StudentControllerServlet extends HttpServlet {
 		catch (Exception exc) {
 			throw new ServletException();
 		}
+	}
+
+
+	private void searchStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// read search name from form data
+        String theSearchName = request.getParameter("theSearchName");
+        
+        // search students from db util
+        List<Student> students = studentDbUtil.searchStudents(theSearchName);
+        
+        // add students to the request
+        request.setAttribute("STUDENT_LIST", students);
+                
+        // send to JSP page (view)
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+        dispatcher.forward(request, response);
+		
+		
+		
+		
 	}
 
 
@@ -168,8 +212,12 @@ public class StudentControllerServlet extends HttpServlet {
 		// add the student to the database
 		studentDbUtil.addStudent(theStudent);
 		
+		// this section was modified so that it would work with POST instead of GET
 		// send back to the main page (the student list)
-		listStudents(request, response);
+		//listStudents(request, response);
+		
+		// SEND AS REDIRECT to avoid multiple-browser reload issue
+        response.sendRedirect(request.getContextPath() + "/StudentControllerServlet?command=LIST");
 		
 	}
 }

@@ -24,12 +24,35 @@
 	<div id="container">
 		<div id="content">
 	
-	<!-- button -->
-	
-		<input type="button" value="Add Student"
-			onclick="window.location.href='add-student-form.jsp'; return false;"
-			class="add-student-button"
-		/>
+
+		<table>
+		
+			<tr>
+				<td>		
+					<!-- Add button -->		
+					<input type="button" value="Add Student"
+					onclick="window.location.href='add-student-form.jsp'; return false;"
+					class="add-student-button" />
+				</td>	
+				<td>
+					<!--  add a search box -->
+		            <form action="StudentControllerServlet" method="GET">
+		                <input type="hidden" name="command" value="SEARCH" />
+		                <input type="submit" value="Search" class="add-student-button" />
+		                <input type="text" name="theSearchName" />
+		            </form>
+				</td>	
+				<td>
+		          <!-- Reset List button -->		
+		          <form action="StudentControllerServlet" method="GET">
+			          <input type="hidden" name="command" value="SEARCH" />
+			          <input type="submit" value="Reset" class="add-student-button" />
+		           </form>
+				</td>	
+			</tr>
+		</table>
+		
+		<br/>		
 		
 		<table>
 			<tr>
@@ -38,8 +61,6 @@
 				<th>Email</th>	
 				<th>Action</th>					
 			</tr>
-			
-
 			
 			<c:forEach var="tempStudent" items="${STUDENT_LIST }">
 
@@ -68,7 +89,6 @@
 	
 			</c:forEach>
 		</table>	
-		
 		</div>
 	</div>
 

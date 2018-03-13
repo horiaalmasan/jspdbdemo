@@ -22,7 +22,7 @@
 	</div>
 	<div id="container">
 		<H3> Add Student </H3>
-		<form action="StudentControllerServlet" method="GET" id="formStudent">
+		<form action="StudentControllerServlet" method="POST" id="formStudent">
 			<input type="hidden" name="command" value="ADD" />
 			<table>
 				<tr>

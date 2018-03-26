@@ -24,8 +24,6 @@ public class StudentControllerServlet extends HttpServlet {
 	@Resource(name="jdbc/web_student_tracker")
 	private DataSource dataSource;
 	
-	
-	
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -39,29 +37,25 @@ public class StudentControllerServlet extends HttpServlet {
 		}
 	}
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             // read the "command" parameter
             String theCommand = request.getParameter("command");
                     
             // route to the appropriate method
             switch (theCommand) {
-                            
+            
             case "ADD":
                 addStudent(request, response);
                 break;
-                                
+                
             default:
                 listStudents(request, response);
             }
-                
         }
         catch (Exception exc) {
             throw new ServletException(exc);
         }
-        
     }
 	
 
@@ -69,7 +63,6 @@ public class StudentControllerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		try {
 			// read the command parameter
 			String theCommand = request.getParameter("command");
@@ -124,10 +117,6 @@ public class StudentControllerServlet extends HttpServlet {
         // send to JSP page (view)
         RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
         dispatcher.forward(request, response);
-		
-		
-		
-		
 	}
 
 
@@ -195,7 +184,6 @@ public class StudentControllerServlet extends HttpServlet {
 		// send to JSP page (view)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
 		dispatcher.forward(request, response);
-
 	}
 	
 
@@ -211,10 +199,6 @@ public class StudentControllerServlet extends HttpServlet {
 		
 		// add the student to the database
 		studentDbUtil.addStudent(theStudent);
-		
-		// this section was modified so that it would work with POST instead of GET
-		// send back to the main page (the student list)
-		//listStudents(request, response);
 		
 		// SEND AS REDIRECT to avoid multiple-browser reload issue
         response.sendRedirect(request.getContextPath() + "/StudentControllerServlet?command=LIST");

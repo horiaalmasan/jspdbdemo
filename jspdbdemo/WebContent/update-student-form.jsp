@@ -15,6 +15,7 @@
 </head>
 
 <body>
+<div id="pagebody">
 	<div id="wrapper">
 		<div id="header">
 			<h2>The ALM University</h2>
@@ -50,6 +51,7 @@
 			<a href="StudentControllerServlet">Back to list ...</a>
 		</p>
 	</div>
+</div>
 
 </body>
 </html>

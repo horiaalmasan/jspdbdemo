@@ -14,19 +14,15 @@
 </head>
 
 <body>
-
+<div id="page">
 	<div id="wrapper">
 		<div id="header">
 			<h2>The ALM University</h2>
 		</div>
 	</div>
-
 	<div id="container">
 		<div id="content">
-	
-
-		<table>
-		
+		<table id="t01">
 			<tr>
 				<td>		
 					<!-- Add button -->		
@@ -91,6 +87,8 @@
 		</table>	
 		</div>
 	</div>
-
+</div>
+<p id="demo1"></p>
+<p id="demo2"></p>
 </body>
 </html>

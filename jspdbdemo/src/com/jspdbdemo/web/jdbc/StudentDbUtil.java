@@ -224,7 +224,6 @@ public class StudentDbUtil {
         Connection myConn = null;
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
-        int studentId;
         
         try {
             

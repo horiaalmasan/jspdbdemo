@@ -2,13 +2,19 @@ html, body{
 	margin-left:15px; margin-right:15px; 
 	padding:0px; 
 	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
 }
 
 table {   
 	border-collapse:collapse;
+ 	border-top:1px solid gray;
 	border-bottom:1px solid gray;
 	font-family: Tahoma,Verdana,Segoe,sans-serif;
-	width:72%;
+	width:100%;
+}
+
+table#t01 {   
+	border-style:none;
 }
  
 th {
@@ -25,9 +31,10 @@ tr {
  
 tr:nth-child(even) {background: #FFFFFF}
 tr:nth-child(odd) {background: #f2f2f2}	
- 
-#wrapper {width: 100%; margin-top: 0px; }
-#header {width: 72%; background: #0775d3; margin-top: 0px; padding:15px 0px 15px 0px;}
+
+#page {width: 600px; margin: auto;} 
+#wrapper {width: 100%; margin-top: 0px;}
+#header {width: 100%; background: #0775d3; margin-top: 0px; padding:15px 0px 15px 0px;}
 #header h2 {width: 100%; margin:auto; color: #FFFFFF; padding-left: 10px}
 #container {width: 100%; margin:auto}
 #container h3 {color: #000;}
@@ -36,12 +43,13 @@ tr:nth-child(odd) {background: #f2f2f2}
 .add-student-button {
 	border: 1px solid #666; 
 	border-radius: 5px; 
-	padding: 4px; 
+	padding: 20px; 
 	font-size: 10px;
 	font-weight: bold;
 	width: 100px; 
 	padding: 5px 10px; 
-	
-	margin-bottom: 15px;
-	background: #cccccc;
+	allign:"middle";
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: #cce6ff;
 }

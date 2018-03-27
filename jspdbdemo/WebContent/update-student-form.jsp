@@ -1,5 +1,3 @@
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 

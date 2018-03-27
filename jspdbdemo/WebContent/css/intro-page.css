@@ -19,3 +19,8 @@ html, body{
 	margin-bottom: 10px;
 	background: #cce6ff;
 }
+
+.run-button:hover{
+		color: #FFFFFF;
+		background-color: #0775d3;
+}
